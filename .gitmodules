@@ -1,0 +1,3 @@
+[submodule "vendor/mwengine"]
+	path = vendor/mwengine
+	url = https://github.com/Malckinator/mwengine.git
