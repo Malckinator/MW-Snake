@@ -54,6 +54,7 @@ const std::vector<uint16> indices = {
 class Application {
 public:
 	Application() {
+		HideConsole();
 		SetupGraphics();
 
 		std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
@@ -317,6 +318,12 @@ void Callback(void* userPtr, Event& event) {
 			switch (((KeyDownEvent*) &event)->GetKeycode()) {
 			case Keycode::Escape:
 				app->toClose = true;
+				break;
+			case Keycode::C:
+				if (IsConsoleVisible())
+					HideConsole();
+				else
+					ShowConsole();
 				break;
 			case Keycode::Space:
 				app->DestroySnake(app->snake);
