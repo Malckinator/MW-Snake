@@ -41,10 +41,10 @@ struct Instance {
 };
 
 const std::vector<Vertex> vertices = {
-	{ { -0.5f, -0.5f } },
-	{ { 0.5f, -0.5f } },
 	{ { 0.5f, 0.5f } },
-	{ { -0.5f, 0.5f } }
+	{ { 0.5f, -0.5f } },
+	{ { -0.5f, -0.5f } },
+	{ { -0.5f, 0.5f } },
 };
 
 const std::vector<uint16> indices = {
@@ -234,6 +234,7 @@ public:
 			SHADER_DATA_TYPE_FLOAT_VEC4, SHADER_DATA_TYPE_FLOAT_VEC4, SHADER_DATA_TYPE_FLOAT_VEC4, SHADER_DATA_TYPE_FLOAT_VEC4
 		};
 		graphicsPipeline->instanceCount = quads;
+		graphicsPipeline->cullingMode = CULLING_MODE_BACK_BIT;
 		graphicsPipeline->imageFormat = display->GetImageFormat();
 		graphicsPipeline->vertexShader = { vertexShader, "main" };
 		graphicsPipeline->fragmentShader = { fragmentShader, "main" };
@@ -242,7 +243,6 @@ public:
 
 	glm::uvec2 GetApplePos() {
 		std::vector<glm::uvec2> positions;
-		uint32 i = 0;
 
 		for (uint32 x = 0; x < boardSize.x; x++) {
 			for (uint32 y = 0; y < boardSize.y; y++) {
@@ -252,7 +252,6 @@ public:
 					continue;
 
 				positions.push_back(pos);
-				i++;
 			}
 		}
 
