@@ -152,6 +152,9 @@ public:
 			last = ptr;
 			ptr = last->next;
 		}
+
+		instance->WaitUntilIdle();
+		GenMeshes();
 	}
 
 	void SetupGraphics() {
@@ -176,12 +179,11 @@ public:
 		data = indexBuffer->MapMemory(indexBuffer->GetSize(), 0);
 		memcpy(data, indices.data(), indexBuffer->GetSize());
 		indexBuffer->UnmapMemory(data);
+
+		GenMeshes();
 	}
 
 	void Render() {
-		instance->WaitUntilIdle();
-		GenMeshes();
-
 		commandBuffer->StartFrame(display);
 		commandBuffer->QueueDraw(graphicsPipeline);
 		commandBuffer->EndFrame();
